@@ -41,7 +41,7 @@
     wx.onMenuShareAppMessage({
         title: '天啦撸！原来我是《老炮儿》里面的'+actor+'！你也来测测你是里面的谁！',
         desc: name+'的内心就像《老炮儿》里的'+actor+'，你呢？',
-        link: 'http://mrsix.huocc.com/share2/{{ rid }}/', // 分享链接
+        link: 'http:///share2/{{ rid }}/', // 分享链接
         imgUrl: '{% static 'img/mrsix.jpg' %}', // 分享图标
         //type: '', // 分享类型,music、video或link，不填默认为link
         //dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
@@ -72,7 +72,7 @@
 {% block onMenuShareTimeline %}
     wx.onMenuShareTimeline({
          title: '天啦撸！原来我是《老炮儿》里面的'+actor+'！你也来测测你是里面的谁！',
-        link: 'http://mrsix.huocc.com/share2/{{ rid }}/', // 分享链接
+        link: 'http:///share2/{{ rid }}/', // 分享链接
         imgUrl: '{% static 'img/mrsix.jpg' %}',
         success: function () {
            // 用户确认分享后执行的回调函数

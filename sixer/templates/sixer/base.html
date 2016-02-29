@@ -21,7 +21,7 @@
     <script>
     wx.config({
         debug: false,
-        appId: 'wx0572e52dc3d9139a',
+        appId: '',
         timestamp: {{ timestamp }},
         nonceStr: '{{ nonceStr }}',
         signature: '{{ signature }}',
@@ -32,7 +32,7 @@
         wx.onMenuShareAppMessage({
             title: '来测测你是《老炮儿》中的谁',
             desc: '你的内心是六爷、小飞还是晓波呢？',
-            link: 'http://mrsix.huocc.com/no2/', // 分享链接
+            link: 'http:///no2/', // 分享链接
             imgUrl: '{% static 'img/mrsix.jpg' %}', // 分享图标
             //type: '', // 分享类型,music、video或link，不填默认为link
             //dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
@@ -48,7 +48,7 @@
         {% block onMenuShareTimeline %}
         wx.onMenuShareTimeline({
             title: '来测测你是《老炮儿》中的谁',
-            link: 'http://mrsix.huocc.com/no2/',
+            link: 'http:///no2/',
             imgUrl: '{% static 'img/mrsix.jpg' %}',
             //success: function () { 
             //    // 用户确认分享后执行的回调函数
