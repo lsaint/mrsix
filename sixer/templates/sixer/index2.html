@@ -1,0 +1,50 @@
+
+
+{% extends "sixer/base.html" %}
+{% load staticfiles %}
+
+
+{% block head %}
+    <style>
+        html,
+        body {
+            width:100%;
+            height: 100%;
+            position: relative;
+            overflow: auto;
+            background-color: #141414;
+            margin: 0;
+        }
+    </style>
+    <script>
+		$(function() {
+			$(".two_rules_btn").click(function() {
+				$(".mask_layer").show();
+				$("body").css("overflow","hidden");
+			});
+			$(".mask_layer").click(function() {
+				$("body").css("overflow","auto");
+				$(this).hide();
+				return false;
+			});
+		});
+	</script>
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <img class="width_full" src="{% static 'img/bg_index_two.jpg' %}" />
+
+        <a href="/inspection/" class="width_full two_test_heart_btn">
+        </a>
+        <div class="width_full two_rules_btn">
+    </div>
+
+    </div>
+		<div class="mask_layer hide">
+			<div class="action_rules_bg">
+				<img class="width_full" src="{% static 'img/action_rule_contents2.png' %}">
+			</div>
+    </div>
+{% endblock %}

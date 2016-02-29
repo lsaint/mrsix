@@ -1,0 +1,177 @@
+
+
+{% extends "sixer/base.html" %}
+{% load staticfiles %}
+
+
+{% block head %}
+    <script type="text/javascript" src="{% static 'js/hammer.min.js' %}"></script>
+    <style type="text/css">
+			html,
+			body {
+				height: 100%;
+				position: relative;
+				overflow: auto;
+                margin: 0;
+				background-color: #141414;
+				background-image: url("{% static 'img/purchase_bg.jpg' %}");
+				background-size: cover;
+			}
+    </style>
+    <script>
+		var currentProduct = window.localStorage.getItem("currentProduct");
+        if(currentProduct==null){
+            currentProduct="1";
+        }
+		$(function() {
+			//设置页面进来时要显示哪个帅哥
+			switch (currentProduct) {
+				case "1":
+					$("#product_01").fadeIn().siblings().hide();
+					break;
+				case "2":
+					$("#product_02").fadeIn().siblings().hide();
+					break;
+				case "3":
+					$("#product_03").fadeIn().siblings().hide();
+					break;
+			}
+			//分享按钮点击
+			$(".share_btn").click(function() {
+				$(".mask_layer").show();
+                $(".purchase_share").show();
+                $(".purchase_now").hide();
+                $(".get_money_already").hide();
+			});
+			//遮罩层点击
+			$(".mask_layer").click(function() {
+                $(".purchase_share").hide();
+                $(".purchase_now").hide();
+                $(".get_money_already").hide();
+                $(this).hide();
+				return false;
+			});
+
+{#            $("#purchase").click(function(){#}
+{#                $(".mask_layer").show();#}
+{#                $(".purchase_share").hide();#}
+{#                $(".purchase_now").show();#}
+{#                $(".get_money_already").hide();#}
+{#            });#}
+			//创建一个新的hammer对象并且在初始化时指定要处理的dom元素
+			var hammertime = new Hammer(document.getElementById("products"));
+			//添加左划事件
+			hammertime.on("swipeleft", function(e) {
+				swipeleft()
+			});
+			//添加右划事件
+			hammertime.on("swiperight", function(e) {
+				swiperight()
+			});
+
+		});
+		//手指左划
+		function swipeleft() {
+             if(currentProduct == 1){
+                 currentProduct=3;
+                    $("#product_0" + currentProduct).fadeIn().siblings().hide();
+             }
+             else if (currentProduct >= 2) {
+                    currentProduct--;
+                    $("#product_0" + currentProduct).fadeIn().siblings().hide();
+             }
+
+
+		}
+		//手指右划
+		function swiperight() {
+             if(currentProduct == 3){
+                 currentProduct=1;
+                    $("#product_0" + currentProduct).fadeIn().siblings().hide();
+             }
+             else if (currentProduct <= 2) {
+                    currentProduct++;
+                    $("#product_0" + currentProduct).fadeIn().siblings().hide();
+                }
+
+		}
+        //购买操作
+		function purchase(){
+			switch(currentProduct+""){
+					case "1":
+					window.location.href="http://stock.pingan.com/huodong/sgfyz/index.html?WT.mc_id=hl-sgfyz-1512-01";
+					break;
+				case "2":
+					window.location.href="http://stock.pingan.com/huodong/bkhj/index.html?WT.mc_id=hl-bkhj-1512-01";
+					break;
+				case "3":
+					window.location.href="https://stock.pingan.com/omm/phonex/fund_product_case.html?WT.mc_id=hl-lhbgmy-1512-01";
+					break;
+			}
+		}
+        //体验灵活宝
+        function uselinghuobao(){
+            window.location.href="https://stock.pingan.com/omm/phonex/fund_product_case.html?WT.mc_id=hl-lhbgmy-1512-01";
+        }
+        //领取体验金
+        function getdiscount(){
+            {% if user.is_active %}
+                $.ajax({
+            url:'/getdiscount/',
+            type:'get',
+{#            dataType : 'jsonp',#}
+            error:function(){
+               alert('error');
+            },
+            success:function(data){
+              //体验金领取成功，post到share页面
+              if(data=="0"){
+                $("#form1").submit();
+              }
+              //领取过体验金，弹出提示框
+              else if(data=="1"){
+                $(".mask_layer").show();
+                $(".purchase_share").hide();
+                $(".purchase_now").hide();
+                $(".get_money_already").show();
+              }
+            }
+            });
+
+            {% else %}
+                window.location.href="{{ login_url }}".replace("&amp;","&");
+            {% endif %}
+        }
+	</script>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <img class="share_btn" src="{% static 'img/share_btn.png' %}" />
+        <img onclick="swipeleft()" class="arrow left_arrow" src="{% static 'img/arrow.png' %}" />
+        <img onclick="swiperight()" class="arrow right_arrow" src="{% static 'img/arrow.png' %}" />
+        <div id="products" class="width_full purchase_product">
+            <img id="product_01" class="width_full" src="{% static 'img/product_01.png' %}" />
+            <img id="product_02" class="hide width_full" src="{% static 'img/product_02.png' %}" />
+            <img id="product_03" class="hide width_full" src="{% static 'img/product_03.png' %}" />
+        </div>
+        <div class="width_full purchase_bottom ">
+            <a href="javascript:void(0)" id="purchase" onclick="purchase()"><img class="width_full" src="{% static 'img/purchase_product_btn.png' %}" /></a>
+            <a href="javascript:void(0)" onclick="getdiscount()"><img class="width_full" src="{% static 'img/get_money_btn.png' %}" /></a>
+        </div>
+    </div>
+    <div class="mask_layer hide ">
+        <img class="width_full purchase_share hide" src="{% static 'img/cue.png' %}" />
+        <div class="purchase_now hide">
+            <img class="width_full" src="{% static 'img/purchase_now.png' %}" />
+            <div onclick="purchase()" style="position: absolute;border:1px solid transparent;height:19%;width:40%;bottom: 8.3%;left:30%;"></div>
+        </div>
+
+        <div class="get_money_already hide">
+            <img class="width_full"  src="{% static 'img/get_money_already.png' %}" />
+             <div onclick="uselinghuobao()" style="position: absolute;border:1px solid transparent;height:19%;width:40%;bottom: 17.3%;left:30%;"></div>
+        </div>
+
+    </div>
+        <form  id="form1" action="/share/" enctype="multipart/form-data" method="post"></form>
+{% endblock %}

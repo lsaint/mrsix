@@ -1,0 +1,135 @@
+
+
+{% extends "sixer/base.html" %}
+{% load staticfiles %}
+{% load static %}
+
+{% block head %}
+<script>
+    var currentQuestion = 1;
+    var answer = ["a", "a", "a"];
+    $(function() {
+            //点击下一页
+        $('.next_question_btn').click(function() {
+            //3题答完，显示扫指纹
+            if (currentQuestion == 3) {
+                $(".fingerprint_box").show();
+                answer = answer.sort();
+                getresult(answer[0] + answer[1] + answer[2]);
+            } else {
+                currentQuestion++;
+                $(".test_title").attr("src","{% get_static_prefix %}"+"img/question_0"+currentQuestion+".png");
+                $("#question" + currentQuestion).show().siblings().hide();
+            }
+        });
+        //监听选项点击
+        $("ul li img").click(function() {
+            $(this).parent().siblings().children(".on").attr("src", "{% get_static_prefix %}"+"img/" + $(this).parent().siblings().children(".on").attr("id") + ".png").removeClass("on");
+            $(this).attr("src", "{% get_static_prefix %}"+"img/" + $(this).attr("id") + "_on.png").addClass("on");
+            switch (currentQuestion) {
+                case 1:
+                    answer[0] = $(this).attr("data-value");
+                    break;
+                case 2:
+                    answer[1] = $(this).attr("data-value");
+                    break;
+                case 3:
+                    answer[2] = $(this).attr("data-value");
+                    break;
+            }
+            console.log(answer);
+        });
+        //监听指纹图片点击
+        $(".fingerprint").on("touchstart",function(e){
+            e.preventDefault();
+            $(".light").show();
+            $(".light").animate({
+                top: '77.85074626865672%'
+            },1000);
+
+            $(".light").animate({
+                top: '51.82421227197347%'
+            },1000);
+            setTimeout(function(){$(".light").hide();window.location.href="/result/";},2000);
+        });
+    });
+    //判断测试结果
+    function getresult(data) {
+        switch (data) {
+            case "ccc":
+            case "bcc":
+            case "acc":
+            window.localStorage.setItem("currentProduct","3");
+//						console.log("灵活宝");
+                break;
+            case "abc":
+            case "abb":
+            case "bbb":
+            case "bbc":
+            window.localStorage.setItem("currentProduct","1");
+//						console.log("基金1折");
+                break;
+            case "aac":
+            case "aab":
+            case "aaa":
+            window.localStorage.setItem("currentProduct","2");
+//						console.log("高收益基金");
+                break;
+        }
+    }
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <img class="width_full" src="{% static 'img/bg_test_heart.jpg' %}" />
+        <img  class="width_full test_title" src="{% static 'img/question_01.png' %}" />
+        <div class="questions">
+            <!--问题1-->
+            <ul id="question1" class="width_full" style="margin: 0;padding: 0;">
+                <li class="width_full">
+                    <img data-value="a" id="q1_a" class="width_full on" src="{% static 'img/q1_a_on.png' %}" />
+                </li>
+                <li class="width_full">
+                    <img data-value="b" id="q1_b" class="width_full" src="{% static 'img/q1_b.png' %}" />
+                </li>
+                <li class="width_full">
+                    <img data-value="c" id="q1_c" class="width_full" src="{% static 'img/q1_c.png' %}" />
+                </li>
+            </ul>
+            <!--问题2-->
+            <ul id="question2" class="width_full hide" style="margin: 0;padding: 0;">
+                <li class="width_full">
+                    <img data-value="a" id="q2_a" class="width_full on " src="{% static 'img/q2_a_on.png' %}" />
+                </li>
+                <li class="width_full">
+                    <img data-value="b" id="q2_b" class="width_full" src="{% static 'img/q2_b.png' %}" />
+                </li>
+                <li class="width_full">
+                    <img data-value="c" id="q2_c" class="width_full" src="{% static 'img/q2_c.png' %}" />
+                </li>
+            </ul>
+            <!--问题3-->
+            <ul id="question3" class="width_full hide" style="margin: 0;padding: 0;">
+                <li class="width_full">
+                    <img data-value="a" id="q3_a" class="width_full on " src="{% static 'img/q3_a_on.png' %}" />
+                </li>
+                <li class="width_full">
+                    <img data-value="b" id="q3_b" class="width_full" src="{% static 'img/q3_b.png' %}" />
+                </li>
+                <li class="width_full">
+                    <img data-value="c" id="q3_c" class="width_full" src="{% static 'img/q3_c.png' %}" />
+                </li>
+            </ul>
+        </div>
+        <div class="width_full next_question_btn">
+        </div>
+        </div>
+        <div class="fingerprint_box hide ">
+        <img class="width_full" src="{% static 'img/fingerprint_bg.jpg' %}" />
+        <img class="width_full light hide "  src="{% static 'img/light.png' %}"/>
+        <div class="fingerprint"></div>
+    </div>
+{% endblock %}

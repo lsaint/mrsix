@@ -1,0 +1,114 @@
+
+
+{% extends "sixer/base.html" %}
+{% load staticfiles %}
+{% load static %}
+
+{% block head %}
+
+    <script>
+		var currentProduct = window.localStorage.getItem("currentProduct");
+        var actor="";
+        var name='{{ request.user.last_name }}'==''?'我':'{{ request.user.last_name }}';
+		$(function() {
+            //设置页面进来时要显示哪个帅哥
+            switch (currentProduct) {
+                case "1":
+                    $("#result_bg").attr("src","{% get_static_prefix %}"+"img/resultbg_xiaobo.jpg");
+                        actor="晓波";
+                    break;
+                case "2":
+                    $("#result_bg").attr("src","{% get_static_prefix %}"+"img/resultbg_liuye.jpg");
+                        actor="六爷";
+                    break;
+                case "3":
+                    $("#result_bg").attr("src","{% get_static_prefix %}"+"img/resultbg_xiaofei.jpg");
+                        actor="小飞";
+                    break;
+            }
+			$(".result_share").click(function() {
+				$(".mask_layer").show();
+			});
+			$(".mask_layer").click(function() {
+				$(this).hide();
+				return false;
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block onMenuShareAppMessage %}
+    wx.onMenuShareAppMessage({
+        title: '天啦撸！原来我是《老炮儿》里面的'+actor+'！你也来测测你是里面的谁！',
+        desc: name+'的内心就像《老炮儿》里的'+actor+'，你呢？',
+        link: 'http://mrsix.huocc.com/share2/{{ rid }}/', // 分享链接
+        imgUrl: '{% static 'img/mrsix.jpg' %}', // 分享图标
+        //type: '', // 分享类型,music、video或link，不填默认为link
+        //dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+        success: function () {
+            // 用户确认分享后执行的回调函数
+            var jsonObject={};
+                jsonObject.rid="{{ rid }}";
+                jsonObject.ret=currentProduct;
+            $.ajax({
+                    url:'/result/',
+                    type:'post',
+                    data:JSON.stringify(jsonObject),
+                    error:function(){
+                       alert('error');
+                    },
+                    success:function(data){
+                      //设置发信人，祝福语，收信人不可编辑#}
+                      console.log("post成功");
+                    }
+            });
+        },
+        //cancel: function () {
+        //    // 用户取消分享后执行的回调函数
+        //}
+    });
+{% endblock %}
+
+{% block onMenuShareTimeline %}
+    wx.onMenuShareTimeline({
+         title: '天啦撸！原来我是《老炮儿》里面的'+actor+'！你也来测测你是里面的谁！',
+        link: 'http://mrsix.huocc.com/share2/{{ rid }}/', // 分享链接
+        imgUrl: '{% static 'img/mrsix.jpg' %}',
+        success: function () {
+           // 用户确认分享后执行的回调函数
+            var jsonObject={};
+                jsonObject.rid="{{ rid }}";
+                jsonObject.ret=currentProduct;
+            $.ajax({
+                    url:'/result/',
+                    type:'post',
+                    data:JSON.stringify(jsonObject),
+                    error:function(){
+                       alert('error');
+                    },
+                    success:function(data){
+                      //设置发信人，祝福语，收信人不可编辑#}
+                      console.log("post成功");
+                    }
+            });
+        },
+        //cancel: function () {
+        //    // 用户取消分享后执行的回调函数
+        //}
+    });
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+			<img id="result_bg" class="width_full" src="" />
+			<a class="resul_product" href="/products/"></a>
+			<div class="result_bottom_btn result_share">
+			</div>
+			<a href="/inspection/" class="result_bottom_btn result_again">
+			</a>
+
+		</div>
+		<div class="mask_layer hide">
+			<img class="width_full" src="{% static 'img/cue.png' %}" />
+		</div>
+{% endblock %}

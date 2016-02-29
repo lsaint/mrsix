@@ -1,0 +1,52 @@
+
+
+{% extends "sixer/base.html" %}
+{% load staticfiles %}
+{% load static %}
+
+{% block head %}
+<script>
+    var currentProduct ="{{ ret }}";
+
+    $(function() {
+        //设置页面进来时要显示哪个帅哥
+    switch (currentProduct) {
+        case "1":
+            $("#result_bg").attr("src", "{% get_static_prefix %}"+"img/share_xiaobo.jpg");
+            break;
+        case "2":
+            $("#result_bg").attr("src", "{% get_static_prefix %}"+"img/share_liuye.jpg");
+            break;
+        case "3":
+            $("#result_bg").attr("src", "{% get_static_prefix %}"+"img/share_xiaofei.jpg");
+            break;
+        default:
+            $("#result_bg").attr("src", "{% get_static_prefix %}"+"img/default_head.png");
+    }
+        $(".result_share").click(function() {
+            $(".mask_layer").show();
+        });
+        $(".mask_layer").click(function() {
+            $(this).hide();
+            return false;
+        });
+    });
+
+</script>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+			<img id="result_bg" class="width_full" src="" />
+			<div class="head_name">
+				<img class="width_full" src="{{ pic}}" />
+				<b>{{ name }}</b>
+			</div>
+			<a href="/inspection/" class="share2_play_btn">
+			</a>
+
+		</div>
+{#		<div class="mask_layer hide">#}
+{#			<img class="width_full" src="{% static 'img/cue.png' %}" />#}
+{#		</div>#}
+{% endblock %}

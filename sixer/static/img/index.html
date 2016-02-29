@@ -1,0 +1,583 @@
+<html>
+<head>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+<script>
+$(document).ready(function(){
+  $("div.btmlist").click(function(){
+   $("div.rule").toggle();
+  });
+});
+
+$(document).ready(function(){
+  $("div.rule").click(function(){
+    $("div.rule").toggle();
+  });
+});
+
+$(document).ready(function(){
+  $("div.btmstart").click(function(){
+    $("div.frame0").hide();
+    $("div.frame1").show();
+  });
+});
+
+$(document).ready(function(){
+  $("div.answer1alist").click(function(){
+    $("img.answer1a").hide();   
+    $("img.answer1aon").show();
+    $("img.answer1b").show();
+    $("img.answer1bon").hide();
+    $("img.answer1c").show();
+    $("img.answer1con").hide();        
+  });
+});
+
+$(document).ready(function(){
+  $("div.answer1blist").click(function(){
+    $("img.answer1a").show();   
+    $("img.answer1aon").hide();
+    $("img.answer1b").hide();
+    $("img.answer1bon").show();
+    $("img.answer1c").show();
+    $("img.answer1con").hide(); 
+  });
+});
+
+$(document).ready(function(){
+  $("div.answer1clist").click(function(){
+    $("img.answer1a").show();   
+    $("img.answer1aon").hide();
+    $("img.answer1b").show();
+    $("img.answer1bon").hide();
+    $("img.answer1c").hide();
+    $("img.answer1con").show(); 
+  });
+});
+
+$(document).ready(function(){
+  $("div.btmquestion1").click(function(){
+    $("div.frame1").hide();
+    $("div.frame2").show();
+    $("img.answer1a").hide();   
+    $("img.answer1aon").show();
+    $("img.answer1b").show();
+    $("img.answer1bon").hide();
+    $("img.answer1c").show();
+    $("img.answer1con").hide();
+  });
+});
+
+$(document).ready(function(){
+  $("div.btmquestion2").click(function(){
+    $("div.frame2").hide();
+    $("div.frame3").show();
+    $("img.answer1a").hide();   
+    $("img.answer1aon").show();
+    $("img.answer1b").show();
+    $("img.answer1bon").hide();
+    $("img.answer1c").show();
+    $("img.answer1con").hide();    
+  });
+});
+
+$(document).ready(function(){
+  $("div.btmquestion3").click(function(){
+    $("div.frame3").hide();
+    $("div.frame4").show();    
+  });
+});
+
+$(document).ready(function(){
+  $("img.fingerprint").click(function(){
+    $("img.light").show(0,function(){
+      var div=$("img.light"); 	
+      div.animate({top:'+=25%'},1000);
+      div.animate({top:'-=25%'},1000,function(){
+        $("img.light").hide(0,function(){        
+	   $("div.frame4").hide();
+           $("div.frame5").show();
+	   });
+        }); 
+    });    
+  });
+});
+
+$(document).ready(function(){
+  $("div.btmfenxiang").click(function(){
+   $("div.fenxiangframe").toggle();
+  });
+});
+
+$(document).ready(function(){
+  $("div.fenxiangframe").click(function(){
+    $("div.fenxiangframe").toggle();
+  });
+});
+
+$(document).ready(function(){
+  $("div.btmagain").click(function(){
+    $("div.frame1").show();
+    $("div.frame5").hide();
+    $("div.frame6").hide();
+    $("div.frame7").hide();    
+  });
+});
+
+</script>
+
+
+
+<style type="text/css">
+
+*
+{
+margin:0;
+}
+
+.main
+{
+min-height:1000px;
+Position:absolute;
+width:100%;
+height:100%;
+top:0%;
+}
+
+img.index2
+{
+width:100%;
+height:100%;
+display:block;
+}
+
+.btmlist
+{
+height:8%;
+width:12%;
+Position:absolute;
+bottom:0%;
+right:0%;
+}
+
+.btmstart
+{
+height:15%;
+width:45%;
+Position:absolute;
+bottom:0%;
+left:28%;
+}
+
+.rule
+{
+display:none;
+background-color:rgba(0,0,0,0.8);
+height:100%;
+width:100%;
+Position:absolute;
+top:0%;
+left:0%;
+}
+
+.rulelist
+{
+height:80%;
+width:90%;
+Position:absolute;
+top:10%;
+left:5%;
+background:url(./action_rule_bg.png);
+background-size:100% 100%;
+background-repeat: no-repeat;
+background-position:center;
+overflow-y:auto;
+}
+
+.contents2
+{
+
+width:100%;
+}
+
+.frame0
+{
+height:100%;
+width:100%;
+background-size:100% 100%;
+Position:absolute;
+top:0%;
+left:0%;
+}
+
+.frame1
+{
+display:none;
+height:100%;
+width:100%;
+background:url(./bg_test_heart.jpg);
+background-size:100% 100%;
+Position:absolute;
+top:0%;
+left:0%;
+}
+
+.frame2
+{
+display:none;
+height:100%;
+width:100%;
+background:url(./bg_test_heart.jpg);
+background-size:100% 100%;
+Position:absolute;
+top:0%;
+left:0%;
+}
+
+.frame3
+{
+display:none;
+height:100%;
+width:100%;
+background:url(./bg_test_heart.jpg);
+background-size:100% 100%;
+Position:absolute;
+top:0%;
+left:0%;
+}
+
+.frame4
+{
+display:none;
+height:100%;
+width:100%;
+background:url(./fingerprint_bg.jpg);
+background-size:100% 100%;
+Position:absolute;
+top:0%;
+left:0%;
+}
+
+.frame5
+{
+display:none;
+height:100%;
+width:100%;
+background:url(./resultbg_liuye.jpg);
+background-size:100% 100%;
+Position:absolute;
+top:0%;
+left:0%;
+}
+
+.frame6
+{
+display:none;
+height:100%;
+width:100%;
+background:url(./resultbg_xiaobo.jpg);
+background-size:100% 100%;
+Position:absolute;
+top:0%;
+left:0%;
+}
+
+.frame7
+{
+display:none;
+height:100%;
+width:100%;
+background:url(./resultbg_xiaofei.jpg);
+background-size:100% 100%;
+Position:absolute;
+top:0%;
+left:0%;
+}
+
+.question1
+{
+width:100%;
+height:auto;
+Position:absolute;
+top:45%;
+}
+
+.question2
+{
+width:100%;
+height:auto;
+Position:absolute;
+top:41%;
+}
+
+.answer1alist
+{
+width:93%;
+height:auto;
+background:#666666;
+Position:absolute;
+top:52%;
+left:3%;
+}
+
+.answer1a
+{
+width:93%;
+height:auto;
+Position:absolute;
+top:52%;
+left:3%;
+display:none;
+}
+
+.answer1aon
+{
+width:93%;
+height:auto;
+Position:absolute;
+top:52%;
+left:3%;
+}
+
+.answer1blist
+{
+width:93%;
+height:auto;
+Position:absolute;
+top:62%;
+left:3%;
+}
+
+.answer1b
+{
+width:93%;
+height:auto;
+Position:absolute;
+top:62%;
+left:3%;
+}
+
+.answer1bon
+{
+width:93%;
+height:auto;
+Position:absolute;
+top:62%;
+left:3%;
+display:none;
+}
+
+.answer1clist
+{
+width:93%;
+height:auto;
+Position:absolute;
+top:72%;
+left:3%;
+}
+
+.answer1c
+{
+width:93%;
+height:auto;
+Position:absolute;
+top:72%;
+left:3%;
+}
+
+.answer1con
+{
+width:93%;
+height:auto;
+Position:absolute;
+top:72%;
+left:3%;
+display:none;
+}
+
+.btmquestion1,.btmquestion2,.btmquestion3
+{
+height:15%;
+width:45%;
+Position:absolute;
+bottom:0%;
+left:28%;
+z-index:99999;
+}
+
+.fingerprint
+{
+height:auto;
+width:38%;
+Position:absolute;
+top:51%;
+left:29%;
+}
+
+.light
+{
+display:none;
+height:auto;
+width:80%;
+Position:absolute;
+top:51%;
+left:8%;
+}
+
+.btmliaojie
+{
+height:18%;
+width:40%;
+Position:absolute;
+bottom:15%;
+left:32%;
+z-index:99999;
+}
+
+
+.btmfenxiang
+{
+height:7%;
+width:40%;
+Position:absolute;
+bottom:3%;
+left:6%;
+z-index:99999;
+}
+
+.btmagain
+{
+height:7%;
+width:40%;
+Position:absolute;
+bottom:3%;
+left:55%;
+z-index:99999;
+}
+
+.fenxiangframe
+{
+display:none;
+background-color:rgba(0,0,0,0.8);
+height:100%;
+width:100%;
+Position:absolute;
+top:0%;
+left:0%;
+}
+
+.fenxiang
+{
+width:100%;
+height:auto;
+£ý
+
+</style>
+</head>
+
+
+<body >
+<div class="main">
+	<div class="frame0">
+		<img class="index2" src="./bg_index_two.jpg" />
+		<div class="btmlist"></div>
+		<div class="btmstart"></div>
+		<div class="rule">
+			<div class="rulelist">
+			<img class="contents2" src="action_rule_contents2.png"/>
+			</div>
+		</div>
+	</div>
+
+	<div class="frame1">		
+		<div class="question1">
+		<img class="question1" src="./question_01.png" />
+		</div>
+		<div class="answer1alist">
+		<img class="answer1a" src="./q1_a.png"/>
+		<img class="answer1aon" src="./q1_a_on.png"/>
+		</div>
+		<div class="answer1blist">
+		<img class="answer1b" src="./q1_b.png"/>
+		<img class="answer1bon" src="./q1_b_on.png"/>
+		</div>
+		<div class="answer1clist">
+		<img class="answer1c" src="./q1_c.png"/>
+		<img class="answer1con" src="./q1_c_on.png"/>
+		</div>	
+		<div class="btmquestion1"></div>	
+	</div>
+	<div class="frame2">		
+		<div class="question2">
+		<img class="question2" src="./question_02.png" />
+		</div>
+		<div class="answer1alist">
+		<img class="answer1a" src="./q2_a.png"/>
+		<img class="answer1aon" src="./q2_a_on.png"/>
+		</div>
+		<div class="answer1blist">
+		<img class="answer1b" src="./q2_b.png"/>
+		<img class="answer1bon" src="./q2_b_on.png"/>
+		</div>
+		<div class="answer1clist">
+		<img class="answer1c" src="./q2_c.png"/>
+		<img class="answer1con" src="./q2_c_on.png"/>
+		</div>	
+		<div class="btmquestion2"></div>	
+	</div>
+        <div class="frame3">		
+		<div class="question1">
+		<img class="question1" src="./question_03.png" />
+		</div>
+		<div class="answer1alist">
+		<img class="answer1a" src="./q3_a.png"/>
+		<img class="answer1aon" src="./q3_a_on.png"/>
+		</div>
+		<div class="answer1blist">
+		<img class="answer1b" src="./q3_b.png"/>
+		<img class="answer1bon" src="./q3_b_on.png"/>
+		</div>
+		<div class="answer1clist">
+		<img class="answer1c" src="./q3_c.png"/>
+		<img class="answer1con" src="./q3_c_on.png"/>
+		</div>	
+		<div class="btmquestion3"></div>	
+	</div>
+	<div class="frame4">		
+		<img class="fingerprint" src="./fingerprint.png" />
+		<img class="light" src="./light.png" />	
+	</div>
+	<div class="frame5">		
+		<div class="btmliaojie"></div>
+		<div class="btmfenxiang"></div>
+		<div class="btmagain"></div>
+		<div class="fenxiangframe">
+		<img class="fenxiang" src="./cue.png" />
+		</div>	
+
+		
+	</div>
+	<div class="frame6">		
+		<div class="btmliaojie"></div>
+		<div class="btmfenxiang"></div>
+		<div class="btmagain"></div>
+		<div class="fenxiangframe">
+		<img class="fenxiang" src="./cue.png" />
+		</div>	
+
+		
+	</div>
+	<div class="frame7">		
+		<div class="btmliaojie"></div>
+		<div class="btmfenxiang"></div>
+		<div class="btmagain"></div>
+		<div class="fenxiangframe">
+		<img class="fenxiang" src="./cue.png" />
+		</div>	
+
+		
+	</div>
+
+</div>
+
+</body>
+</html>
